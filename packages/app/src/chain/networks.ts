@@ -1,5 +1,5 @@
 import { Chain } from "viem";
-import { sonic, megaethTestnet, baseSepolia, monadTestnet, riseTestnet } from "viem/chains";
+import { sonic, megaethTestnet, baseSepolia, monadTestnet, riseTestnet, seiTestnet } from "viem/chains";
 import { solanaChains, type SolanaChainConfig } from "@/solana/config";
 
 export interface ChainConfig extends Chain {
@@ -17,6 +17,16 @@ function getRpcUrls(chain: Chain, url: string | undefined) {
     },
   }
 }
+
+// Sei Testnet
+const seiTestnet_ = {
+  ...seiTestnet,
+  rpcUrls: getRpcUrls(seiTestnet, "https://evm-rpc-testnet-sei.stingray.plus"),
+  testnet: true,
+  color: "#C41E3A", // Sei brand red color
+  logo: "/logos/sei.png",
+  faucetUrl: "https://www.docs.sei.io/learn/faucet",
+} as const as ChainConfig;
 
 const riseTestnet_ = {
   ...riseTestnet,
@@ -67,6 +77,7 @@ const baseSepolia_ = {
 
 // Add the EVM chains we want to include in the race
 export const evmChains = [
+  seiTestnet_,
   riseTestnet_,
   monadTestnet_,
   megaEthTestnet,
